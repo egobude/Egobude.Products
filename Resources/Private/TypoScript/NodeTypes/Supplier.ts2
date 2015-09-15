@@ -1,0 +1,41 @@
+prototype(Egobude.Products:Suppliers) < prototype(TYPO3.TypoScript:Template) {
+    templatePath = 'resource://Egobude.Products/Private/Templates/Documents/Suppliers.html'
+    node = ${node}
+    title = ${q(node).property('title')}
+    image = ${q(node).property('image')}
+    text = ${q(node).property('text')}
+    currentUri = ${request.httpRequest.uri}
+
+    parentNode = ${q(node).parents().first().get(0)}
+
+    main = TYPO3.Neos:ContentCollection{
+        nodePath = 'main'
+    }
+
+    suppliers = TYPO3.TypoScript:Collection {
+        sourceNode = ${q(node).is('[instanceof Egobude.Products:Category]') ? node : site}
+        collection = ${q(node).children('[instanceof Egobude.Products:Supplier]')}
+
+        itemName = 'node'
+        itemRenderer = Egobude.Products:Supplier {
+            templatePath = ${'resource://Egobude.Products/Private/Templates/TypoScript/SupplierBox.html'}
+        }
+    }
+}
+
+prototype(Egobude.Products:Supplier) < prototype(TYPO3.TypoScript:Template) {
+    templatePath = 'resource://Egobude.Products/Private/Templates/Documents/Supplier.html'
+    main = TYPO3.Neos:ContentCollection{
+        nodePath = 'main'
+    }
+}
+
+prototype(TYPO3.Neos:PrimaryContent).Supplier {
+    condition = ${q(node).is('[instanceof Egobude.Products:Supplier]')}
+    type = 'Egobude.Products:Supplier'
+}
+
+prototype(TYPO3.Neos:PrimaryContent).Suppliers {
+    condition = ${q(node).is('[instanceof Egobude.Products:Suppliers]')}
+    type = 'Egobude.Products:Suppliers'
+}

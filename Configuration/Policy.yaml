@@ -1,0 +1,11 @@
+privilegeTargets:
+  TYPO3\Flow\Security\Authorization\Privilege\Method\MethodPrivilege:
+    'Egobude.Products:StandardControllerActions':
+      matcher: 'method(Egobude\Products\Controller\StandardController->(index)Action())'
+
+roles:
+  'TYPO3.Flow:Everybody':
+    privileges:
+      -
+        privilegeTarget: 'Egobude.Products:StandardControllerActions'
+        permission: GRANT

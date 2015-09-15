@@ -1,0 +1,136 @@
+{namespace media=TYPO3\Media\ViewHelpers}
+{namespace ts=TYPO3\TypoScript\ViewHelpers}
+{namespace neos=TYPO3\Neos\ViewHelpers}
+
+<div class="row">
+    <div class="col-xs-4">
+        <f:if condition="{previousProduct}">
+            <p class="text-left">
+                <neos:link.node node="{previousProduct}">{previousProduct.properties.title}</neos:link.node>
+            </p>
+        </f:if>
+    </div>
+
+    <div content="col-xs-4">
+        <p class="text-center">
+            <neos:link.node node="{parentNode}">{parentNode.properties.title}</neos:link.node>
+        </p>
+    </div>
+
+    <div class="col-xs-4">
+        <f:if condition="{nextProduct}">
+            <p class="text-right">
+                <neos:link.node node="{nextProduct}">{nextProduct.properties.title}</neos:link.node>
+            </p>
+        </f:if>
+    </div>
+</div>
+
+<hr>
+
+<div class="page-header">
+    <h1>{title}</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="product-image">
+            <f:if condition="{image}">
+                <f:then>
+                    <media:image image="{image}" alt="{title}" title="{title}" maximumWidth="500" allowCropping="TRUE" class="img-responsive"/>
+                </f:then>
+                <f:else>
+                    Kein Bild vorhanden.
+                </f:else>
+            </f:if>
+        </div>
+    </div>
+    <div class="col-md-6">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="product-sku">
+                    <strong>Sku: </strong> {sku}
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="product-price">
+                    <strong>Preis: </strong> <f:format.currency currencySign="€" decimalSeparator="." thousandsSeparator=",">{price}</f:format.currency>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-md-12">
+                <strong>Erscheinungsdatum: </strong><f:format.date format="d.m.Y">{releaseDate}</f:format.date>
+            </div>
+
+        </div>
+        <hr>
+
+        <div class="product-main">
+            {main -> f:format.raw()}
+        </div>
+
+        <f:if condition="{supplier}">
+            <div class="page-header">
+                <h3>Hersteller</h3>
+            </div>
+            <neos:link.node node="{supplier}">
+                {supplier.properties.title}
+            </neos:link.node>
+        </f:if>
+
+        <f:if condition="{images}">
+            <div class="page-header">
+                <h3>Zusätzliche Downloads</h3>
+            </div>
+            <div class="product-images">
+                {images -> f:format.raw()}
+            </div>
+            <hr>
+        </f:if>
+
+        <f:if condition="{files}">
+            <div class="page-header">
+                <h3>Zusätzliche Dateien</h3>
+            </div>
+            <div class="product-images">
+                {files -> f:format.raw()}
+            </div>
+            <hr>
+        </f:if>
+
+    </div>
+
+    <f:if condition="{accessories}">
+        <div class="page-header">
+            <h3>Zubehör Artikel</h3>
+        </div>
+
+        <div class="category-products">
+            <section{attributes -> f:format.raw()}>
+            <div class="row">
+                {accessories -> f:format.raw()}
+            </div>
+            </section>
+        </div>
+    </f:if>
+
+    <f:if condition="{similarProducts}">
+        <div class="page-header">
+            <h3>Ähnliche Artikel</h3>
+        </div>
+
+        <div class="category-products">
+            <section{attributes -> f:format.raw()}>
+            <div class="row">
+                {similarProducts -> f:format.raw()}
+            </div>
+            </section>
+        </div>
+    </f:if>
+
+</div>

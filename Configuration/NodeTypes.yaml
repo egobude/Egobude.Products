@@ -1,0 +1,16 @@
+'Egobude.Products:Attribute':
+  ui:
+    label: 'Attribut'
+    group: structure
+    inspector:
+      groups:
+        page:
+          label: 'Attribute'
+  properties:
+    attribute:
+      type: string
+      ui:
+        label: 'Attribut'
+        reloadIfChanged: TRUE
+        inspector:
+          group: page

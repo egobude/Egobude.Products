@@ -1,0 +1,13 @@
+{namespace ts=TYPO3\TypoScript\ViewHelpers}
+{namespace neos=TYPO3\Neos\ViewHelpers}
+{namespace typo3cr=TYPO3\TYPO3CR\ViewHelpers}
+
+<f:section name="categoryList">
+    <typo3cr:widget.paginate nodes="{categoryCollection}" as="paginatedCategoryItems" widgetId="{node.title}" configuration="{itemsPerPage: 2}">
+        <div>
+            <f:for each="{paginatedCategoryItems}" as="category">
+                <ts:render path="itemRenderer" context="{node: category}" />
+            </f:for>
+        </div>
+    </typo3cr:widget.paginate>
+</f:section>

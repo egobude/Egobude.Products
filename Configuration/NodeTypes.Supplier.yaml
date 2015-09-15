@@ -1,0 +1,37 @@
+'Egobude.Products:Supplier':
+  superTypes:
+    - 'TYPO3.Neos:Document'
+    - 'TYPO3.Neos.NodeTypes:TextWithImage'
+  childNodes:
+    main:
+      constraints:
+        nodeTypes:
+          '*': FALSE
+          'TYPO3.Neos.NodeTypes:Text': TRUE
+      type: 'TYPO3.Neos:ContentCollection'
+  ui:
+    label: 'Hersteller'
+    group: structure
+    inspector:
+      groups:
+        page:
+          label: 'Product'
+
+'Egobude.Products:Suppliers':
+  superTypes:
+    - 'TYPO3.Neos:Document'
+    - 'TYPO3.Neos.NodeTypes:TextWithImage'
+  childNodes:
+    main:
+      constraints:
+        nodeTypes:
+          '*': FALSE
+          'TYPO3.Neos.NodeTypes:Text': TRUE
+      type: 'TYPO3.Neos:ContentCollection'
+  ui:
+    label: 'Hersteller Übersicht'
+    group: structure
+    inspector:
+      groups:
+        page:
+          label: 'Product'

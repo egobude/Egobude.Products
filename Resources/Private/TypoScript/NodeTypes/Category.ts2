@@ -1,0 +1,38 @@
+prototype(Egobude.Products:Category) < prototype(TYPO3.TypoScript:Template) {
+    templatePath = 'resource://Egobude.Products/Private/Templates/Documents/Category.html'
+    node = ${node}
+    title = ${q(node).property('title')}
+    image = ${q(node).property('image')}
+    text = ${q(node).property('text')}
+    currentUri = ${request.httpRequest.uri}
+
+    parentNode = ${q(node).parents().first().get(0)}
+
+    main = TYPO3.Neos:ContentCollection{
+        nodePath = 'main'
+    }
+
+    subCategories = TYPO3.TypoScript:Collection {
+        sourceNode = ${q(node).is('[instanceof Egobude.Products:Category]') ? node : site}
+        collection = ${q(node).children('[instanceof Egobude.Products:Category]')}
+
+        itemName = 'node'
+        itemRenderer = Egobude.Products:Category {
+            templatePath = ${'resource://Egobude.Products/Private/Templates/TypoScript/CategoryBox.html'}
+        }
+    }
+
+    products = TYPO3.TypoScript:Collection {
+        collection = ${q(node).property('products')}
+
+        itemName = 'node'
+        itemRenderer = Egobude.Products:Product {
+            templatePath = ${'resource://Egobude.Products/Private/Templates/TypoScript/ProductBox.html'}
+        }
+    }
+}
+
+prototype(TYPO3.Neos:PrimaryContent).Category {
+    condition = ${q(node).is('[instanceof Egobude.Products:Category]')}
+    type = 'Egobude.Products:Category'
+}

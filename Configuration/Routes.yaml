@@ -1,0 +1,9 @@
+-
+  name: 'Egobude Products'
+  uriPattern: 'products/(/{@action})'
+  defaults:
+    '@package':    'Egobude.Products'
+    '@controller': 'Standard'
+    '@action':     'index'
+    '@format':     'html'
+  appendExceedingArguments: true

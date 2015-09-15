@@ -1,0 +1,59 @@
+prototype(Egobude.Products:Product) < prototype(TYPO3.TypoScript:Template) {
+    templatePath = 'resource://Egobude.Products/Private/Templates/TypoScript/Product.html'
+    node = ${node}
+    title = ${q(node).property('title')}
+    text = ${q(node).property('text')}
+    price = ${q(node).property('price')}
+    image = ${q(node).property('image')}
+    priceVisibility = ${q(node).property('priceVisibility')}
+
+    previousProduct = ${q(node).prev('[instanceof Egobude.Products:Product]').get(0)}
+    nextProduct = ${q(node).next('[instanceof Egobude.Products:Product]').get(0)}
+    parentNode = ${q(node).parents().first().get(0)}
+
+    main = TYPO3.Neos:ContentCollection{
+        nodePath = 'main'
+    }
+
+    images = TYPO3.Neos:ContentCollection{
+        nodePath = 'images'
+    }
+
+    files = TYPO3.Neos:ContentCollection{
+        nodePath = 'files'
+    }
+
+    similarProducts = TYPO3.TypoScript:Collection {
+        collection = ${q(node).property('similarProducts')}
+
+        itemName = 'node'
+        itemRenderer = Egobude.Products:Product {
+            templatePath = ${'resource://Egobude.Products/Private/Templates/TypoScript/ProductBox.html'}
+        }
+    }
+
+    accessories = TYPO3.TypoScript:Collection {
+        collection = ${q(node).property('accessories')}
+
+        itemName = 'node'
+        itemRenderer = Egobude.Products:Product {
+            templatePath = ${'resource://Egobude.Products/Private/Templates/TypoScript/ProductBox.html'}
+        }
+    }
+
+    @cache{
+        mode = 'cached'
+        entryIdentifier {
+            node = ${node}
+        }
+        entryTags {
+            1 = ${'Node_' + node.identifier}
+            2 = ${'Node_' + this.docTitleNode.identifier}
+        }
+    }
+}
+
+prototype(TYPO3.Neos:PrimaryContent).Product {
+    condition = ${q(node).is('[instanceof Egobude.Products:Product]')}
+    type = 'Egobude.Products:Product'
+}

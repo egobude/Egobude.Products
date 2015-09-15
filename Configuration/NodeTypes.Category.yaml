@@ -1,0 +1,40 @@
+'Egobude.Products:Category':
+  superTypes:
+    - 'TYPO3.Neos:Document'
+    - 'TYPO3.Neos.NodeTypes:TextWithImage'
+  childNodes:
+    main:
+      constraints:
+        nodeTypes:
+          '*': FALSE
+          'TYPO3.Neos.NodeTypes:Text': TRUE
+      type: 'TYPO3.Neos:ContentCollection'
+  ui:
+    icon: 'icon-folder-open'
+    label: 'Category'
+    group: structure
+    inspector:
+      groups:
+        page:
+          label: 'Category'
+  properties:
+    products:
+      type: references
+      ui:
+        label: 'Artikel'
+        inspector:
+          group: 'document'
+          editorOptions:
+            nodeTypes: ['Egobude.Products:Product']
+
+'Egobude.Products:CategoryList':
+  superTypes:
+    'TYPO3.Neos:Content': TRUE
+  ui:
+    label: 'CategoryList'
+    icon: icon-list
+    inlineEditable: true
+    group: 'structure'
+  constraints:
+    nodeTypes:
+      '*': false

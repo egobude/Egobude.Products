@@ -1,0 +1,24 @@
+prototype(Egobude.Products:CategoryList) < prototype(TYPO3.Neos:Content){
+    templatePath = 'resource://Egobude.Products/Private/Templates/NodeTypes/CategoryList.html'
+    sectionName = 'categoryList'
+
+    itemRenderer = Egobude.Products:CategoryShort
+
+    categoryRequest = ${request.arguments.tag}
+    categoryCollection =  ${q(site).find('[instanceof Egobude.Products:Category]').get()}
+    categoryCollection.@process.slice = ${q(value).count() > 0 ? q(value).slice(0, String.toInteger(2)).get() : value}
+
+    @cache {
+        mode = 'cached'
+        maximumLifetime = '86400'
+        entryIdentifier {
+            node = ${node}
+            editPreviewMode = ${editPreviewMode}
+            format = ${request.format}
+        }
+        entryTags {
+            1 = ${'Node_' + documentNode.identifier}
+            2 = ${'DescendantOf_' + documentNode.identifier}
+        }
+    }
+}

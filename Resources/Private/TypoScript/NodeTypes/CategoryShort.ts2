@@ -1,0 +1,5 @@
+prototype(Egobude.Products:CategoryShort) < prototype(TYPO3.Neos:Content){
+    // set the template path and section to use
+    templatePath = 'resource://Egobude.Products/Private/Templates/TypoScriptObjects/CategoryShort.html'
+    sectionName = 'categoryShort'
+}

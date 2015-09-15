@@ -1,0 +1,27 @@
+{namespace ts=TYPO3\TypoScript\ViewHelpers}
+{namespace neos=TYPO3\Neos\ViewHelpers}
+{namespace media=TYPO3\Media\ViewHelpers}
+
+<f:section name="categoryShort">
+    <div class="col-xs-12 col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <f:format.crop maxCharacters="25">{node.properties.title}</f:format.crop>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <neos:link.node node="{node}">
+                    <f:if condition="{image}">
+                        <f:then>
+                            <media:image image="{image}" alt="{title}" title="{title}" maximumWidth="200" allowCropping="TRUE" class="img-responsive center-block"/>
+                        </f:then>
+                        <f:else>
+                            <img src="{f:uri.resource(path: 'Images/placeholder.gif' package:'Egobude.Products')}" title="{node.properties.title}" class="img-responsive center-block">
+                        </f:else>
+                    </f:if>
+                </neos:link.node>
+            </div>
+        </div>
+    </div>
+</f:section>

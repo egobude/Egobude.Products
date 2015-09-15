@@ -1,0 +1,79 @@
+'Egobude.Products:Product':
+  superTypes:
+    - 'TYPO3.Neos:Document'
+    - 'TYPO3.Neos.NodeTypes:TextWithImage'
+  ui:
+    icon: 'icon-file-text'
+    label: 'Product'
+    group: structure
+    inspector:
+      groups:
+        page:
+          label: 'Product'
+  childNodes:
+    main:
+      constraints:
+        nodeTypes:
+          '*': FALSE
+          'TYPO3.Neos.NodeTypes:Text': TRUE
+      type: 'TYPO3.Neos:ContentCollection'
+    images:
+      type: 'TYPO3.Neos:ContentCollection'
+    files:
+      type: 'TYPO3.Neos:ContentCollection'
+  properties:
+    supplier:
+      type: reference
+      ui:
+        label: 'Hersteller'
+        inspector:
+          group: 'page'
+          editorOptions:
+            nodeTypes: ['Egobude.Products:Supplier']
+    accessories:
+      type: references
+      ui:
+        label: 'Zubehör Artikel'
+        inspector:
+          group: 'page'
+          editorOptions:
+            nodeTypes: ['Egobude.Products:Product']
+    similarProducts:
+      type: references
+      ui:
+        label: 'Ähnliche Artikel'
+        inspector:
+          group: 'page'
+          editorOptions:
+            nodeTypes: ['Egobude.Products:Product']
+    sku:
+      type: string
+      ui:
+        label: 'Sku'
+        reloadIfChanged: TRUE
+        inspector:
+          group: page
+    releaseDate:
+      type: DateTime
+      ui:
+        label: 'Erscheinungsdatum'
+        reloadIfChanged: TRUE
+        inspector:
+          group: page
+          editorOptions:
+            format: 'd-m-Y'
+    price:
+      type: string
+      ui:
+        label: 'Price'
+        reloadIfChanged: TRUE
+        inspector:
+          group: page
+    priceVisibility:
+      type: boolean
+      defaultValue: TRUE
+      ui:
+        label: 'Price display'
+        reloadIfChanged: TRUE
+        inspector:
+          group: page
